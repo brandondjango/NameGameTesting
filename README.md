@@ -71,14 +71,12 @@ To start the irb sandbox, we will need to do three things once we cd into the pr
     
    common_env is shared by the irb_env and the cucumber_env.
     
-    
-    
-  That's how you start the sandbox! Now let's use it.
+   Once in the irb, see support/irb_env.rb for available methods.
   
   #Parallel Testing:
   To run tests in parallel:
   
-  >bundle exec parallel_cucumber features/ -n 5 -o '-t @only -r support/cucumber_env.rb -r features'
+  >bundle exec parallel_cucumber features/ -n 5 -o '-t @regression -r support/cucumber_env.rb -r features'
     
  For reporting, you have to be a little creative aggregating reports. Jenkins has a useful plugin to gather and combine cucumber reports in json, but it is still up to you to make sure parallel reports aren't overwritten by each other.
  
@@ -88,15 +86,6 @@ To start the irb sandbox, we will need to do three things once we cd into the pr
 
 The name is a mess, but it doesn't matter in this case.
     
-    
- # Using the sandbox
- 
- Once you're in the sandbox, try entering:
- 
- >start
- 
- 
- 
  
 # Understanding a page object: methods
  
@@ -105,15 +94,6 @@ The name is a mess, but it doesn't matter in this case.
  https://www.rubydoc.info/gems/watir-webdriver/Watir
  
  
- # Accessibility: Achecker
- 
- Achecker is a free tool that allows you to check your websites compliance in a variety of ways.  This project uses the html markup feature specifically to test for compliance.
- 
- We do this relatiely simply: the Watir class has a method call .html(for example @browser.html) that allows you to grab the html source from a page. 
- 
- When we navigate to a page we want to check for accessbility, we simply grab the source using this method, and paste it into Achecker.  After we check the source, we check the browser for the compliance element, If it is there, the test will pass/we are compliant. Otherwise, the test will fail/we are not compliant.
- 
- That's it!
  
  
  

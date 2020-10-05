@@ -11,7 +11,6 @@ Feature: Corrects Counter
     When I select the correct photo
     Then I should see the Corrects Counter show "1"
 
-    @only
   Scenario: Verify Corrects Counter only increases once on every correct answer click
     Given I am on the Name Game
     When I select the same correct photo "2" times

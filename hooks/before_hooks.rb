@@ -28,6 +28,9 @@ Before do
   elsif ENV["BROWSER"].downcase.include?("firefox")
     capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true, assume_untrusted_issuer: true)
     @browser = Watir::Browser.new(:firefox, desired_capabilites: capabilities) unless ENV["NO_BROWSER"]
+  elsif ENV["BROWSER"].downcase.include?("safari")
+    capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true, assume_untrusted_issuer: true)
+    @browser = Watir::Browser.new(:safari, desired_capabilites: capabilities) unless ENV["NO_BROWSER"]
   elsif ENV["BROWSER"].downcase.include?("mobile")
     driver = Webdriver::UserAgent.driver(browser: :chrome, agent: :iphone, orientation: :portrait)
     @browser = Watir::Browser.new driver

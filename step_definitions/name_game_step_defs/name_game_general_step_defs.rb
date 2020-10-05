@@ -50,3 +50,13 @@ When(/^I iterate through "([^"]*)" questions of the name game selecting "([^"]*)
     page.wait_for_new_name
   end
 end
+
+Then(/^I should see the header displays correct text$/) do
+  page = NameGameHomePage.new @browser
+  expect(page.header_text_displays_correctly?).to (be true), "Expected the header to display the correct text but it did not"
+end
+
+And(/^I should see the name game question display in a correct format$/) do
+  page = NameGameHomePage.new @browser
+  expect(page.name_game_text_displays_correctly?).to (be true), "Expected the name game question to display correctly but it did not"
+end

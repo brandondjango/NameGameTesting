@@ -6,6 +6,8 @@ class NameGameHomePage < BasePage
 
   div(:name_game_header, css: ".header")
 
+  h1(:name_game_question_header, css: ".text-center")
+
   span(:name_in_question_span, id: "name")
 
   div(:stat_div, id: "stats")
@@ -101,6 +103,14 @@ class NameGameHomePage < BasePage
     current_name = name_in_question_span_element.text
     #to-do make better wait here
     @browser.wait_until { !name_in_question_span_element.text.include?(current_name) }
+  end
+
+  def header_text_displays_correctly?
+    name_game_header_element.text.include?("name game")
+  end
+
+  def name_game_text_displays_correctly?
+    !(/who is ([^"]*)\?/).match(name_game_question_header_element.text).nil?
   end
 
 

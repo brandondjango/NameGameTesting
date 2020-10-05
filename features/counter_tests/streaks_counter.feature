@@ -1,4 +1,4 @@
-@only
+
 Feature: Streaks Counter
 
   Scenario: Verify Streaks Counter does NOT increase on a WRONG answer
@@ -15,6 +15,12 @@ Feature: Streaks Counter
     Given I am on the Name Game
     When I select the same correct photo "2" times
     Then I should see the Streaks Counter show "1"
+
+  Scenario: Verify Streaks Counter increases does not reset selecting wrong answer after right answer
+    Given I am on the Name Game
+    When I select the correct photo
+    And I select a wrong photo
+    Then I should see the Streaks Counter show "0"
 
   Scenario: Verify Streaks Counter increases after several iterations of the game - With wrong answers
     Given I am on the Name Game
