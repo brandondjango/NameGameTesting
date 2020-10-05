@@ -18,7 +18,12 @@ end
 
 When(/^I select the same wrong photo "([^"]*)" times$/) do |number|
   page = NameGameHomePage.new @browser
-  page.select_wrong_photo_number_of_times(number)
+  page.select_wrong_photo_number_of_times(number.to_i)
+end
+
+When(/^I select the same correct photo "([^"]*)" times$/) do |number|
+  page = NameGameHomePage.new @browser
+  page.select_correct_photo_number_of_times(number.to_i)
 end
 
 Then(/^I should see the Tries Counter show "([^"]*)"$/) do |expected_count|
