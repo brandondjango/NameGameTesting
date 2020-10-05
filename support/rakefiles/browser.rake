@@ -1,6 +1,5 @@
 require 'require_all'
 require 'yaml'
-require_all 'lib/db/models'
 
 #Rake tasks for the browsers
 
