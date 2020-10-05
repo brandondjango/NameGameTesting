@@ -95,70 +95,9 @@ The name is a mess, but it doesn't matter in this case.
  
  >start
  
- This will create an instance of a Google Chrome browser.  This browser is being controlled by the Watir webdriver.
- 
- Next, we might want to navigate to the Google home page. Let's try running this command:
- 
- >  page = GoogleHomePage.new @browser
- >  @browser.goto page.url_for_page
- 
- What does this command actually do? Several things.
- 
- First, we will immediately notice the browser we opened with our start command will navigate to the google home page. The visit_page method has found our Watir instance of the browser and navigated to the url in the page-object GoogleHomePage.
- 
- Now visit_page has not only navigated us to a page, it has also loaded up the page-object of the url we navigated to. We have loaded them into the variable **page**.
- 
- 'page' is now our our page object, and contains all the dom/html elements of the Google Home Page.
- 
- To see what I mean, lets try two commands.
- 
- >google_search_bar = page.text_fields.first
- 
- and
- 
- >google_search_bar.flash
- 
- What happened? Well simply on the browser the Google search bar flashed red for a very brief instant. You might not have seen it, so I suggest running that last command once while paying attention to the browser.
- 
- Overall, we assigned an element value from our page object to google_search_bar. Specifically, we took all the text_fields from the google page in the form of an array, grabbed the first one, and assigned it to our variable.  In this case, the Google home page only has one text field, so we knew what we were going to get.
- 
- In the next command, we used built in function to make the text field element we grabbed flash.
- 
- **Do not worry if you do not understand this right away.  We will break this down in the next section. Right now we just need to get you familiar with the sandbox**
- 
- page-object/watir have a lot of built in functions to play with(like flash), so you can see how we can use this sandbox to see what we're working with in a page object!
  
  
- # Understanding a page object: elements
  
-Pages in the page object model are the basic building blocks of our automation and are made up of two parts: elements and methods. Let's look back at what we did in the previous section:
-
->page = visit_page(GoogleHomePage)
-
-What is GoogleHomePage? GoogleHomePage is our page object. 
-
-Elements are the html elements of the web page.  Page object translates these html elements into Ruby objects. For example, if you navigate to browser_page_models/google_home_page.rb of this project, you will see:
-
->link(:about_link, text: 'About')
-
-What is happening here? We are taking a link element with the text value "About" and naming it "about_link".
-
-Now, anytime I reference:
-
->GoogleHomePage.about_link_element
-
-I am referring to that element. **DO NOT FORGET THE "_element" PART"**
-
-Now, open the sandbox, try "page = visit_page(GoogleHomePage)", and then try some of these:
-
->page.about_link_element.exist?
-
->page.about_link_element.flash
-
->page.about_link_element.visible?
-
-These are all methods you will use a lot in your automation when you interact with elements. More about these later!
-
 # Understanding a page object: methods
  
  # Watir
