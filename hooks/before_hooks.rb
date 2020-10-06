@@ -34,5 +34,8 @@ Before do
   elsif ENV["BROWSER"].downcase.include?("mobile")
     driver = Webdriver::UserAgent.driver(browser: :chrome, agent: :iphone, orientation: :portrait)
     @browser = Watir::Browser.new driver
+  elsif ENV["BROWSER"].downcase.include?("mobile-tablet")
+    driver = Webdriver::UserAgent.driver(browser: :chrome, agent: :ipad, orientation: :portrait)
+    @browser = Watir::Browser.new driver
   end
 end
