@@ -50,11 +50,7 @@ The prompt for this feature is somewhat unclear: if correct answers appear less 
 
 In attempt to cover as much functionality as possible, we tested for both.
 
-We took a completely automated approach.  We ran a script where for certain employees, we would answer correctly when their names appeared in the prompt and would track how often that employee would appear afterwards.  We also tracked how often they appeared in the pool of answers for every question.
-
-
-
-Then, we would do the same for employees answered wrong. We found that on average, an employee that would be answered correctly would appear % of the time, while a wrong answered employee would appear % of the time. Tests to be included:
+We took a completely automated approach.  Results can be found in the ProbabilityStatistics.md file, but in summary, we found no evidence to support any sort of probability changes in the acceptance criteria outlined by the client.
 
 ##Counter tests
 

@@ -155,7 +155,185 @@ When(/^I answer for the first name game name incorrectly, and every other name c
 
   print "\n\n#{first_name} was answered incorrectly every time, and was seen in the question #{name_in_question_hash[first_name]} times out of #{iterations}\n\n"
   print "\n\n#{first_name} was seen in the pool #{name_in_pool_hash[first_name]} times out of #{iterations}\n\n"
+
   print "Total stats:\n\n"
+  #Average times a name appears
+  times_a_name_appeared = 0
+  sorted_name_in_question_hash.keys.each{|key| times_a_name_appeared += sorted_name_in_question_hash[key]}
+  average = times_a_name_appeared / sorted_name_in_question_hash.keys.length
+  print "The average of times a name appeared in the question was #{average}"
+
+  sorted_name_in_pool_hash = name_in_pool_hash.sort_by(&:last)
+  sorted_name_in_question_hash = name_in_question_hash.sort_by(&:last)
+  print "Names in pool:\n"
+  sorted_name_in_pool_hash.each{|array| print "#{array}\n"}
+
+  print "\n\nNames in question:\n"
+  sorted_name_in_question_hash.each{|array| print "#{array}\n"}
+end
+
+When(/^I answer for the first name game name correctly, and every other name incorrectly over "([^"]*)" questions$/) do |iterations|
+  page = NameGameHomePage.new @browser
+
+  iterations = iterations.to_f
+
+  name_in_question_hash = {}
+  name_in_pool_hash = {}
+
+  first_name = page.name_in_question
+
+  for i in 1..iterations.to_f
+    #Mark if name appeard in question
+    if name_in_question_hash.key?(page.name_in_question)
+      name_in_question_hash[page.name_in_question]+=1
+    else
+      name_in_question_hash[page.name_in_question] = 1
+    end
+    #mark if name appeared in pool of answers for question
+    page.names_in_photo_divs.each{ |name|
+      if name_in_pool_hash.key?(name)
+        name_in_pool_hash[name]+=1
+      else
+        name_in_pool_hash[name] = 1
+      end
+    }
+
+
+    #############Select Logic
+
+    if page.name_in_question.include?(first_name)
+      page.select_correct_photo
+      page.wait_for_new_name
+    else
+      page.select_a_number_of_wrong_photos(4)
+      page.select_correct_photo
+      page.wait_for_new_name
+    end
+
+  end
+
+  print "\n\n#{first_name} was answered correctly every time, and was seen in the question #{name_in_question_hash[first_name]} times out of #{iterations}\n\n"
+  print "\n\n#{first_name} was seen in the pool #{name_in_pool_hash[first_name]} times out of #{iterations}\n\n"
+  print "Total stats:\n\n"
+  sorted_name_in_pool_hash = name_in_pool_hash.sort_by(&:last)
+  sorted_name_in_question_hash = name_in_question_hash.sort_by(&:last)
+  print "Names in pool:\n"
+  sorted_name_in_pool_hash.each{|array| print "#{array}\n"}
+
+  print "\n\nNames in question:\n"
+  sorted_name_in_question_hash.each{|array| print "#{array}\n"}
+end
+
+When(/^I answer for the first name game name incorrectly, and every other name incorrect over "([^"]*)" questions$/) do |arg|
+  page = NameGameHomePage.new @browser
+
+  iterations = iterations.to_f
+
+  name_in_question_hash = {}
+  name_in_pool_hash = {}
+
+  first_name = page.name_in_question
+
+  for i in 1..iterations.to_f
+    #Mark if name appeard in question
+    if name_in_question_hash.key?(page.name_in_question)
+      name_in_question_hash[page.name_in_question]+=1
+    else
+      name_in_question_hash[page.name_in_question] = 1
+    end
+    #mark if name appeared in pool of answers for question
+    page.names_in_photo_divs.each{ |name|
+      if name_in_pool_hash.key?(name)
+        name_in_pool_hash[name]+=1
+      else
+        name_in_pool_hash[name] = 1
+      end
+    }
+
+
+    #############Select Logic
+
+    if page.name_in_question.include?(first_name)
+      page.select_a_number_of_wrong_photos(4)
+      page.select_correct_photo
+      page.wait_for_new_name
+    else
+      page.select_a_number_of_wrong_photos(4)
+      page.select_correct_photo
+      page.wait_for_new_name
+    end
+
+  end
+
+  print "\n\n#{first_name} was answered incorrectly every time, and was seen in the question #{name_in_question_hash[first_name]} times out of #{iterations}\n\n"
+  print "\n\n#{first_name} was seen in the pool #{name_in_pool_hash[first_name]} times out of #{iterations}\n\n"
+
+  print "Total stats:\n\n"
+  #Average times a name appears
+  times_a_name_appeared = 0
+  sorted_name_in_question_hash.keys.each{|key| times_a_name_appeared += sorted_name_in_question_hash[key]}
+  average = times_a_name_appeared / sorted_name_in_question_hash.keys.length
+  print "The average of times a name appeared in the question was #{average}"
+
+  sorted_name_in_pool_hash = name_in_pool_hash.sort_by(&:last)
+  sorted_name_in_question_hash = name_in_question_hash.sort_by(&:last)
+  print "Names in pool:\n"
+  sorted_name_in_pool_hash.each{|array| print "#{array}\n"}
+
+  print "\n\nNames in question:\n"
+  sorted_name_in_question_hash.each{|array| print "#{array}\n"}
+end
+
+When(/^I answer for the first name game name correctly, and every other name correctly over "([^"]*)" questions$/) do |arg|
+  page = NameGameHomePage.new @browser
+
+  iterations = iterations.to_f
+
+  name_in_question_hash = {}
+  name_in_pool_hash = {}
+
+  first_name = page.name_in_question
+
+  for i in 1..iterations.to_f
+    #Mark if name appeard in question
+    if name_in_question_hash.key?(page.name_in_question)
+      name_in_question_hash[page.name_in_question]+=1
+    else
+      name_in_question_hash[page.name_in_question] = 1
+    end
+    #mark if name appeared in pool of answers for question
+    page.names_in_photo_divs.each{ |name|
+      if name_in_pool_hash.key?(name)
+        name_in_pool_hash[name]+=1
+      else
+        name_in_pool_hash[name] = 1
+      end
+    }
+
+
+    #############Select Logic
+
+    if page.name_in_question.include?(first_name)
+      page.select_correct_photo
+      page.wait_for_new_name
+    else
+      page.select_a_number_of_wrong_photos(4)
+      page.select_correct_photo
+      page.wait_for_new_name
+    end
+
+  end
+
+  print "\n\n#{first_name} was answered incorrectly every time, and was seen in the question #{name_in_question_hash[first_name]} times out of #{iterations}\n\n"
+  print "\n\n#{first_name} was seen in the pool #{name_in_pool_hash[first_name]} times out of #{iterations}\n\n"
+
+  print "Total stats:\n\n"
+  #Average times a name appears
+  times_a_name_appeared = 0
+  sorted_name_in_question_hash.keys.each{|key| times_a_name_appeared += sorted_name_in_question_hash[key]}
+  average = times_a_name_appeared / sorted_name_in_question_hash.keys.length
+  print "The average of times a name appeared in the question was #{average}"
+
   sorted_name_in_pool_hash = name_in_pool_hash.sort_by(&:last)
   sorted_name_in_question_hash = name_in_question_hash.sort_by(&:last)
   print "Names in pool:\n"
