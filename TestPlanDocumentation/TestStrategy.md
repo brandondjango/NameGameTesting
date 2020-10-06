@@ -42,7 +42,7 @@ Without access to the employee directory, it is impossible using the name game a
 
 However, users can make note that pictures stay associated to the same pictures.  In this case, that is what we did manually with several employees.  With this approach, we confirmed accross sessions picture and data were being pulled consistently in the same pairs.  In the interest of time, this was a cursory check.  Given more time, we could use rikuli to recognize images, and our existing framework to get the names associated with those photos in the DOM.
 
-The strangest occurrence seemed to be a data pair named "WillowTree Staff" with a WillowTree logo picture. This is marked in the defect report.
+The strangest occurrence seemed to be a data pair named "WillowTree Staff" with a WillowTree logo picture. As the client has control of the data, this could undertandably be part of data, but we are makign note of it.
 
 ###Correct/Incorrect Answers have a lower probability of repeating
 
