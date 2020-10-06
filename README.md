@@ -28,6 +28,14 @@ To do both of these and run our tests, we use one command:
 
 "bundle exec" runs cucumber in our bundle context, while "-r cucumber_env.rb" requires/loads the dependencies within our project. Internal dependencies include things like the feature files themselves, step definitions, as well as, again, our third party dependencies(bundle sets up our dependencies within Ruby, we still need to pull them into our project by loading them in our environment).
 
+To run against a specific browser, use the "BROWSER" environment variable:
+
+>bundle exec cucumber -r cucumber_env.rb BROWSER="firefox"
+
+This command without a BROWSER environment variable will defualt to chrome.
+
+Availble BROWSERs are "chrome". "firefox", "safari", "mobile", "mobile-tablet".
+
 #Running a subset of tests
 
 To run a subset of tests, we will need to setup test profiles within the cucumber.yml file.
@@ -71,14 +79,12 @@ To start the irb sandbox, we will need to do three things once we cd into the pr
     
    common_env is shared by the irb_env and the cucumber_env.
     
-    
-    
-  That's how you start the sandbox! Now let's use it.
+   Once in the irb, see support/irb_env.rb for available methods.
   
   #Parallel Testing:
   To run tests in parallel:
   
-  >bundle exec parallel_cucumber features/ -n 5 -o '-t @only -r support/cucumber_env.rb -r features'
+  >bundle exec parallel_cucumber features/ -n 5 -o '-t @regression -r support/cucumber_env.rb -r features'
     
  For reporting, you have to be a little creative aggregating reports. Jenkins has a useful plugin to gather and combine cucumber reports in json, but it is still up to you to make sure parallel reports aren't overwritten by each other.
  
@@ -88,77 +94,7 @@ To start the irb sandbox, we will need to do three things once we cd into the pr
 
 The name is a mess, but it doesn't matter in this case.
     
-    
- # Using the sandbox
  
- Once you're in the sandbox, try entering:
- 
- >start
- 
- This will create an instance of a Google Chrome browser.  This browser is being controlled by the Watir webdriver.
- 
- Next, we might want to navigate to the Google home page. Let's try running this command:
- 
- >  page = GoogleHomePage.new @browser
- >  @browser.goto page.url_for_page
- 
- What does this command actually do? Several things.
- 
- First, we will immediately notice the browser we opened with our start command will navigate to the google home page. The visit_page method has found our Watir instance of the browser and navigated to the url in the page-object GoogleHomePage.
- 
- Now visit_page has not only navigated us to a page, it has also loaded up the page-object of the url we navigated to. We have loaded them into the variable **page**.
- 
- 'page' is now our our page object, and contains all the dom/html elements of the Google Home Page.
- 
- To see what I mean, lets try two commands.
- 
- >google_search_bar = page.text_fields.first
- 
- and
- 
- >google_search_bar.flash
- 
- What happened? Well simply on the browser the Google search bar flashed red for a very brief instant. You might not have seen it, so I suggest running that last command once while paying attention to the browser.
- 
- Overall, we assigned an element value from our page object to google_search_bar. Specifically, we took all the text_fields from the google page in the form of an array, grabbed the first one, and assigned it to our variable.  In this case, the Google home page only has one text field, so we knew what we were going to get.
- 
- In the next command, we used built in function to make the text field element we grabbed flash.
- 
- **Do not worry if you do not understand this right away.  We will break this down in the next section. Right now we just need to get you familiar with the sandbox**
- 
- page-object/watir have a lot of built in functions to play with(like flash), so you can see how we can use this sandbox to see what we're working with in a page object!
- 
- 
- # Understanding a page object: elements
- 
-Pages in the page object model are the basic building blocks of our automation and are made up of two parts: elements and methods. Let's look back at what we did in the previous section:
-
->page = visit_page(GoogleHomePage)
-
-What is GoogleHomePage? GoogleHomePage is our page object. 
-
-Elements are the html elements of the web page.  Page object translates these html elements into Ruby objects. For example, if you navigate to browser_page_models/google_home_page.rb of this project, you will see:
-
->link(:about_link, text: 'About')
-
-What is happening here? We are taking a link element with the text value "About" and naming it "about_link".
-
-Now, anytime I reference:
-
->GoogleHomePage.about_link_element
-
-I am referring to that element. **DO NOT FORGET THE "_element" PART"**
-
-Now, open the sandbox, try "page = visit_page(GoogleHomePage)", and then try some of these:
-
->page.about_link_element.exist?
-
->page.about_link_element.flash
-
->page.about_link_element.visible?
-
-These are all methods you will use a lot in your automation when you interact with elements. More about these later!
-
 # Understanding a page object: methods
  
  # Watir
@@ -166,15 +102,6 @@ These are all methods you will use a lot in your automation when you interact wi
  https://www.rubydoc.info/gems/watir-webdriver/Watir
  
  
- # Accessibility: Achecker
- 
- Achecker is a free tool that allows you to check your websites compliance in a variety of ways.  This project uses the html markup feature specifically to test for compliance.
- 
- We do this relatiely simply: the Watir class has a method call .html(for example @browser.html) that allows you to grab the html source from a page. 
- 
- When we navigate to a page we want to check for accessbility, we simply grab the source using this method, and paste it into Achecker.  After we check the source, we check the browser for the compliance element, If it is there, the test will pass/we are compliant. Otherwise, the test will fail/we are not compliant.
- 
- That's it!
  
  
  

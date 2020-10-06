@@ -5,15 +5,21 @@ require_rel 'common_env.rb'
 
 
 
-def start
+def start_name_game_chrome
   @browser = Watir::Browser.new(:chrome, switches: ['--ignore-certificate-errors'])
-  #page = GoogleHomePage.new @browser
-  #@browser.goto page.url_for_page
+  page = NameGameHomePage.new @browser
+  @browser.goto page.url_for_page
 end
 
-def start_mobile_rui
+def start_name_game_firefox
+  @browser = Watir::Browser.new(:firefox, switches: ['--ignore-certificate-errors'])
+  page = NameGameHomePage.new @browser
+  @browser.goto page.url_for_page
+end
+
+def start_mobile
   driver = Webdriver::UserAgent.driver(browser: :chrome, agent: :iphone, orientation: :portrait)
   @browser = Watir::Browser.new driver
-  page = GoogleHomePage.new @browser
+  page = NameGameHomePage.new @browser
   @browser.goto page.url_for_page
 end

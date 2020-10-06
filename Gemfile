@@ -36,4 +36,4 @@ gem 'java'
 
 #gem 'rukuli'
 
-#gem 'oclc_webdriver_support', git: "http://git.ent.oclc.org/scm/automation/oclcwebdriversupport.git", branch: 'master'
+gem 'mobile_support', git: "https://github.com/brandondjango/MobileTestAutomation.git", branch: 'master'
