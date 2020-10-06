@@ -28,6 +28,14 @@ To do both of these and run our tests, we use one command:
 
 "bundle exec" runs cucumber in our bundle context, while "-r cucumber_env.rb" requires/loads the dependencies within our project. Internal dependencies include things like the feature files themselves, step definitions, as well as, again, our third party dependencies(bundle sets up our dependencies within Ruby, we still need to pull them into our project by loading them in our environment).
 
+To run against a specific browser, use the "BROWSER" environment variable:
+
+>bundle exec cucumber -r cucumber_env.rb BROWSER="firefox"
+
+This command without a BROWSER environment variable will defualt to chrome.
+
+Availble BROWSERs are "chrome". "firefox", "safari", "mobile", "mobile-tablet".
+
 #Running a subset of tests
 
 To run a subset of tests, we will need to setup test profiles within the cucumber.yml file.

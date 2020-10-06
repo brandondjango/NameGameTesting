@@ -50,7 +50,7 @@ The prompt for this feature is somewhat unclear: if correct answers appear less 
 
 In attempt to cover as much functionality as possible, we tested for both.
 
-We took a completely automated approach.  Results can be found in the ProbabilityStatistics.md file, but in summary, we found no evidence to support any sort of probability changes in the acceptance criteria outlined by the client.
+We took a completely automated approach.  The summary of this approach can be found in the ProbabilityStatistics.md file.
 
 ##Counter tests
 
