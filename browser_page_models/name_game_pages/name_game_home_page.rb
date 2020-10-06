@@ -36,8 +36,18 @@ class NameGameHomePage < BasePage
     wait_for_element(name_in_question_span_element)
   end
 
+  def names_in_photo_divs
+    name_array = []
+    name_game_photo_divs.each{|photo_div| name_array.push(photo_div.div(css: ".name").text)}
+    name_array
+  end
+
   def photo_div_with_name(name)
     name_game_photo_divs.find{|photo_div| photo_div.text.include?(name)}
+  end
+
+  def name_included_in_pool?(name)
+    !(photo_div_with_name(name).nil?)
   end
 
   #select photo indexes between 0-4
@@ -103,6 +113,7 @@ class NameGameHomePage < BasePage
     current_name = name_in_question_span_element.text
     #to-do make better wait here
     @browser.wait_until { !name_in_question_span_element.text.include?(current_name) }
+    wait_for_photos_to_load
   end
 
   def header_text_displays_correctly?
@@ -111,6 +122,10 @@ class NameGameHomePage < BasePage
 
   def name_game_text_displays_correctly?
     !(/who is ([^"]*)\?/).match(name_game_question_header_element.text).nil?
+  end
+
+  def wait_for_photos_to_load
+    @browser.wait_until {name_game_photo_divs.length == 5}
   end
 
 

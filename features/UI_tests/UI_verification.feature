@@ -1,7 +1,6 @@
 
 Feature: UI verification of names
 
-  @only
   Scenario: Verify UI display
     Given I am on the Name Game
     Then I should see the header displays correct text

@@ -46,7 +46,13 @@ The strangest occurrence seemed to be a data pair named "WillowTree Staff" with 
 
 ###Correct/Incorrect Answers have a lower probability of repeating
 
-For this testing, we took a completely automated approach.  We ran a script where for certain employees, we would answer correctly when their names appeared in the prompt and would track how often that employee would appear afterwards.
+The prompt for this feature is somewhat unclear: if correct answers appear less frequently, does that mean an employees name appears less amongst options, or does it mean a question with that employees name is less likely to appear again?
+
+In attempt to cover as much functionality as possible, we tested for both.
+
+We took a completely automated approach.  We ran a script where for certain employees, we would answer correctly when their names appeared in the prompt and would track how often that employee would appear afterwards.  We also tracked how often they appeared in the pool of answers for every question.
+
+
 
 Then, we would do the same for employees answered wrong. We found that on average, an employee that would be answered correctly would appear % of the time, while a wrong answered employee would appear % of the time. Tests to be included:
 
