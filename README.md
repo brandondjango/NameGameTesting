@@ -6,7 +6,7 @@ This project also contains the option to run the driver through Interactive Ruby
 
 # Requirements
 
-Ruby
+Ruby.
 
 # Running Tests
 
